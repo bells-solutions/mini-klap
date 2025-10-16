@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - FRONTEND_URL=http://localhost
+      - MAX_FILE_SIZE=104857600
+      - UPLOAD_DIR=./uploads
+      - CLIPS_DIR=./clips
+      - CLIP_DURATION=60
+    volumes:
+      - backend_uploads:/app/uploads
+      - backend_clips:/app/clips
+    networks:
+      - mini-klap-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - mini-klap-network
+
+volumes:
+  backend_uploads:
+  backend_clips:
+
+networks:
+  mini-klap-network:
+    driver: bridge

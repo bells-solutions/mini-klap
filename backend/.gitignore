@@ -1,0 +1,28 @@
+# Uploads and generated clips
+uploads/
+clips/
+*.mp4
+*.srt
+
+# Environment variables
+.env
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
